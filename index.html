@@ -1,0 +1,54 @@
+<html>
+
+<head>
+	<title>Joc de trilers</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="trilers.css">
+</head>
+
+<body>
+	<script>
+
+		// crearem el taulell amb els trilers seqons la dificultad
+		// aquests dos vectors podrien ser una matriu també.
+		// 0 (facil) = 3 trilers y multiplicadorB 2, etc.
+		var numTrilers = [3, 5, 7];
+		var multiplicadorBeneficis = [2, 5, 10];
+
+		do {
+
+			var dificultatEscollida = parseInt(prompt("Escolleix la dificultat:\n0. Fàcil | 1. Intermig | 2. Difícil"));
+
+		} while (!(dificultatEscollida >= 0 && dificultatEscollida <= 2));
+
+		// CARREGUEM LA PART VISUAL
+		// iniciem el primer div board
+
+		document.write('<div id="board">');
+		document.write('<div id="board">');
+
+		for (let index = 0; index < numTrilers[dificultatEscollida]; index++) {
+
+			document.write('<div class="beaker" id="' + index + '">' + index + '</div>');
+
+		}
+
+		// tanquem el div board de dins
+		document.write('</div>');
+
+		// creem el botó
+		document.write('<button id="apostar">Remena i aposta!</button>');
+		document.write("<button onClick='juego()'>Remena i aposta!</button>");
+
+		// tanquem el div board de fora
+		document.write('</div>');
+
+		document.write('<div id="mobil-vertical">');
+		document.write('Si us plau, per jugar col·loca el mòbil en posició hotitzontal.');
+		document.write('</div>');
+
+	</script>
+</body>
+<script src="trilers.js"></script>
+
+</html>
