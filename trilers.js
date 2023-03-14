@@ -7,6 +7,13 @@ var trilersIMultiplicadors = [[3, 2], [5, 5], [7, 10]];
 
 var nomUsuari = prompt('Benvingut al casino IBC\n\nIntrodueix el teu nom:', 'Player');
 
+// mentres !(no sigui un numero), osigui: mentres sigui un numero. Preguntem en bucle
+while (!(isNaN(nomUsuari))) {
+    
+    nomUsuari = prompt('Siusplau, introdueix un nom vàlid', 'Player');
+
+}
+
 do {
 
     var dificultatEscollida = parseInt(prompt('Escolleix la dificultat:\n\n0. Fàcil         [ 3 Trilers & Beneficis X 2 ]\n\n1. Intermig  [ 5 Trilers & Beneficis X 5 ]\n\n2. Difícil      [ 7 Trilers & Beneficis X 10 ]\n\n', 0));
@@ -40,9 +47,13 @@ document.write('</div>');
 
 // aquesta funcio és joc del trilers en si, s'activa al donar clic al botó
 
+let saldoRestant = 0;
+
 let dinersApostats;
 
 let numRandom;
+
+let numUsuari;
 
 function jocTrilers() {
 
@@ -54,11 +65,29 @@ function jocTrilers() {
 
     }
 
-    numRandom = numAleatori(1, trilersIMultiplicadors[dificultatEscollida][0]);
+    numRandom = numAleatori(1, (trilersIMultiplicadors[dificultatEscollida][0]) - 1);
 
+    numUsuari = parseInt(prompt('En que cubilet creus que està la boleta?'));
 
+    if (numRandom == numUsuari) {
 
-    // location.reload();
+        alert('Enhorabona ' + nomUsuari +', has encertat!\nLa boleta estava al cubilet ' + numRandom);
+
+        dinersApostats = dinersApostats * trilersIMultiplicadors[dificultatEscollida][1];
+
+        saldoRestant += dinersApostats;
+
+        confirmJugar();
+
+    } else {
+
+        saldoRestant = saldoRestant - dinersApostats;
+
+        alert('Has perdut!\nLa boleta estava al cubilet ' + numRandom + ' i tu havies dit que era al ' + numUsuari);
+
+        confirmJugar();
+
+    }
 
 }
 
@@ -67,5 +96,18 @@ function numAleatori(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function confirmJugar() {
+    let text = 'Tens ' + saldoRestant + '€.\nVols continuar jugant?';
+    if (confirm(text) == true) {
+
+        jocTrilers();
+
+    } else {
+
+        location.reload();
+
+    }
 }
 
