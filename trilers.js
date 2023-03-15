@@ -11,7 +11,7 @@ do {
 
     nomUsuari = prompt('Benvingut al casino IBC\n\nIntrodueix el teu nom:', 'Player');
 
-    while (nomUsuari.length == 0) {
+    while (nomUsuari == "" || nomUsuari === null) {
 
         nomUsuari = prompt('Siusplau\nIntrodueix un nom vàlid:', 'Player');
 
@@ -112,6 +112,7 @@ function crearAleatori(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+// el confirm que reinicia una altra aposta, o cancelar per reiniciar nom, dificultat etc.
 function confirmJugar() {
     let text = 'Tens ' + saldoRestant + '€.\nVols continuar jugant?';
     if (confirm(text) == true) {
@@ -124,4 +125,3 @@ function confirmJugar() {
 
     }
 }
-
