@@ -83,6 +83,7 @@ function jocTrilers() {
 
     }
 
+    // comprobacions de si hem acertat
     if (numRandom == numUsuari) {
 
         alert('Enhorabona ' + nomUsuari + ', has encertat!\nLa boleta estava al cubilet ' + numRandom);
