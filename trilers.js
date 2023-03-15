@@ -77,7 +77,7 @@ function jocTrilers() {
     // bucle per introduir num dins del rang de cubilets generats
     numUsuari = parseInt(prompt('En que cubilet creus que està la boleta?'));
 
-    while ((numUsuari < 0 && numUsuari > trilersIMultiplicadors[dificultatEscollida][0]) || isNaN(numUsuari)) {
+    while ((numUsuari < 0 && numUsuari > trilersIMultiplicadors[dificultatEscollida][0]) && isNaN(numUsuari)) {
 
         numUsuari = parseInt(prompt("Siusplau\nDiga'm un cubilet entre 0 i " + (trilersIMultiplicadors[dificultatEscollida][0] - 1) + '!'));
 
@@ -96,7 +96,7 @@ function jocTrilers() {
 
         saldoRestant = saldoRestant - dinersApostats;
 
-        alert('Quina pena ' + nomUsuari + ' has perdut!\nLa boleta estava al cubilet ' + numRandom + ' i has apostat al ' + numUsuari);
+        alert('Quina pena ' + nomUsuari + ', has perdut!\nLa boleta estava al cubilet ' + numRandom + ' i has apostat al ' + numUsuari);
 
     }
 
