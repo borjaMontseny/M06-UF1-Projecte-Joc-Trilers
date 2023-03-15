@@ -1,22 +1,17 @@
 // crearem el taulell amb els trilers seqons la dificultad i multiplicadors des d'una matriu
 
-// les files de columna 0 representen la dificultat (0 , 1 , 2) | la columna 1 els multiplicadors
-// i dins d'aquestes hi ha:
-// columnes 0 = trilers |  columnes 1 = multiplicador
+// les files son la dificultat, columna 0 representen els trilers (0 , 1 , 2) | la columna 1 els multiplicadors
 var trilersIMultiplicadors = [[3, 2], [5, 5], [7, 10]];
 
-var nomUsuari = prompt('Benvingut al casino IBC\n\nIntrodueix el teu nom:', 'Player');
+var nomUsuari;
 
-// mentres !(no sigui un numero), osigui: mentres sigui un numero. Preguntem en bucle
-while (!(isNaN(nomUsuari))) {
-    
-    nomUsuari = prompt('Siusplau, introdueix un nom vàlid', 'Player');
-
-}
+var dificultatEscollida;
 
 do {
 
-    var dificultatEscollida = parseInt(prompt('Escolleix la dificultat:\n\n0. Fàcil         [ 3 Trilers & Beneficis X 2 ]\n\n1. Intermig  [ 5 Trilers & Beneficis X 5 ]\n\n2. Difícil      [ 7 Trilers & Beneficis X 10 ]\n\n', 0));
+    nomUsuari = prompt('Benvingut al casino IBC\n\nIntrodueix el teu nom:', 'Player');
+
+    dificultatEscollida = parseInt(prompt('Escolleix la dificultat:\n\n0. Fàcil         [ 3 Trilers & Beneficis X 2 ]\n\n1. Intermig  [ 5 Trilers & Beneficis X 5 ]\n\n2. Difícil      [ 7 Trilers & Beneficis X 10 ]\n\n', 0));
 
 } while (!(dificultatEscollida >= 0 && dificultatEscollida <= 2));
 
@@ -26,6 +21,7 @@ do {
 document.write('<div id="board">');
 document.write('<div id="board">');
 
+// imprimim cubilets segons la dificultat (qtat de cubilets guardada al array a les columnes 0)
 for (let index = 0; index < trilersIMultiplicadors[dificultatEscollida][0]; index++) {
 
     document.write('<div class="beaker" id="' + index + '">' + index + '</div>');
@@ -65,34 +61,42 @@ function jocTrilers() {
 
     }
 
-    numRandom = numAleatori(1, (trilersIMultiplicadors[dificultatEscollida][0]) - 1);
+    numRandom = crearAleatori(1, (trilersIMultiplicadors[dificultatEscollida][0]) - 1);
+
+    // probes pel desenvolupador
+    console.log('La boleta està al cubilet ' + numRandom);
 
     numUsuari = parseInt(prompt('En que cubilet creus que està la boleta?'));
 
+    while ((numUsuari < 0 && numUsuari > trilersIMultiplicadors[dificultatEscollida][0]) || isNaN(numUsuari)) {
+
+        numUsuari = parseInt(prompt("Siusplau\nDiga'm un cubilet entre 0 i " + trilersIMultiplicadors[dificultatEscollida][0] + '!'));
+
+    }
+
     if (numRandom == numUsuari) {
 
-        alert('Enhorabona ' + nomUsuari +', has encertat!\nLa boleta estava al cubilet ' + numRandom);
+        alert('Enhorabona ' + nomUsuari + ', has encertat!\nLa boleta estava al cubilet ' + numRandom);
 
         dinersApostats = dinersApostats * trilersIMultiplicadors[dificultatEscollida][1];
 
         saldoRestant += dinersApostats;
 
-        confirmJugar();
-
     } else {
 
         saldoRestant = saldoRestant - dinersApostats;
 
-        alert('Has perdut!\nLa boleta estava al cubilet ' + numRandom + ' i tu havies dit que era al ' + numUsuari);
-
-        confirmJugar();
+        alert('Has perdut!\nLa boleta estava al cubilet ' + numRandom + ' i apostat al ' + numUsuari);
 
     }
+
+    // juguem de nou o reiniciem per així poder cambiar la dificultat
+    confirmJugar();
 
 }
 
 // per a poder crear randoms entre min inclosos i max inclosos
-function numAleatori(min, max) {
+function crearAleatori(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
