@@ -76,7 +76,7 @@ function jocTrilers() {
     console.log('La boleta està al cubilet ' + numRandom);
 
     // bucle per introduir num dins del rang de cubilets generats
-    numUsuari = parseInt(prompt('En que cubilet creus que està la boleta?'));
+    numUsuari = parseInt(prompt('En que cubilet creus que està la boleta?', 1));
 
     while ((numUsuari < 0 || numUsuari > trilersIMultiplicadors[dificultatEscollida][0])) {
 
