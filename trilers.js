@@ -52,9 +52,9 @@ document.write('</div>');
 
 let saldoRestant = 0; // per a poder sumar la inicialitzo en 0
 
-let dinersApostats;
+let dinersApostats = 0;
 
-let numRandom;
+let numRandom = 0;
 
 let numUsuari = 0;
 
@@ -64,21 +64,21 @@ function jocTrilers() {
     dinersApostats = Number(prompt('Quants diners vols apostar?'));
 
     // comprovant de que ho introïm una quantitat vàlida
-    while (dinersApostats <= 0) {
+    while (dinersApostats <= 0 || isNaN(dinersApostats)) {
 
-        dinersApostats = Number(prompt('Introdueix una quantitat vàlida.', 1));
+        dinersApostats = Number(prompt('Introdueix una quantitat mínima, vàlida.', 1));
 
     }
 
-    numRandom = crearAleatori(1, (trilersIMultiplicadors[dificultatEscollida][0]) - 1);
+    numRandom = crearAleatori(1, (trilersIMultiplicadors[dificultatEscollida][0] - 1));
 
     // probes per al desenvolupador, per saber acertar sempre (o no)
     console.log('La boleta està al cubilet ' + numRandom);
 
     // bucle per introduir num dins del rang de cubilets generats
-    numUsuari = parseInt(prompt('En que cubilet creus que està la boleta?', 1));
+    numUsuari = parseInt(prompt('En que cubilet creus que està la boleta?', 0));
 
-    while ((numUsuari < 0 || numUsuari > trilersIMultiplicadors[dificultatEscollida][0])) {
+    while ((numUsuari < 0 || numUsuari > (trilersIMultiplicadors[dificultatEscollida][0] - 1)) || isNaN(numUsuari)) {
 
         numUsuari = parseInt(prompt("Siusplau\nDiga'm un cubilet entre 0 i " + (trilersIMultiplicadors[dificultatEscollida][0] - 1) + '!'));
 
