@@ -48,7 +48,7 @@ document.write('<div id="mobil-vertical">');
 document.write('Si us plau, per jugar col·loca el mòbil en posició hotitzontal.');
 document.write('</div>');
 
-// aquesta funcio és joc del trilers en si, s'activa al donar clic al botó
+// aquesta funcio és joc del trilers en si, i s'activarà al donar clic al botó
 
 let saldoRestant = 0; // per a poder sumar la inicialitzo en 0
 
