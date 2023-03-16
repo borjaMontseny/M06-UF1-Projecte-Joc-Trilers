@@ -7,6 +7,7 @@ var nomUsuari;
 
 var dificultatEscollida;
 
+// es demana nom (amb comprovació) i dificultat (amb comprovació), si es falla es torna a demanar desde nom
 do {
 
     nomUsuari = prompt('Benvingut al casino IBC\n\nIntrodueix el teu nom:', 'Player');
@@ -49,7 +50,7 @@ document.write('</div>');
 
 // aquesta funcio és joc del trilers en si, s'activa al donar clic al botó
 
-let saldoRestant = 0;
+let saldoRestant = 0; // per a poder sumar la inicialitzo en 0
 
 let dinersApostats;
 
@@ -77,7 +78,7 @@ function jocTrilers() {
     // bucle per introduir num dins del rang de cubilets generats
     numUsuari = parseInt(prompt('En que cubilet creus que està la boleta?'));
 
-    while ((numUsuari < 0 && numUsuari > trilersIMultiplicadors[dificultatEscollida][0]) && isNaN(numUsuari)) {
+    while ((numUsuari < 0 || numUsuari > trilersIMultiplicadors[dificultatEscollida][0])) {
 
         numUsuari = parseInt(prompt("Siusplau\nDiga'm un cubilet entre 0 i " + (trilersIMultiplicadors[dificultatEscollida][0] - 1) + '!'));
 
@@ -86,7 +87,7 @@ function jocTrilers() {
     // comprobacions de si hem acertat
     if (numRandom == numUsuari) {
 
-        alert('Enhorabona ' + nomUsuari + ', has encertat!\nLa boleta estava al cubilet ' + numRandom);
+        alert('Enhorabona ' + nomUsuari + ', has encertat!\nLa boleta estava al cubilet ' + numRandom + ', i has apostat ' + dinersApostats + '€ al cubilet ' + numUsuari);
 
         dinersApostats = dinersApostats * trilersIMultiplicadors[dificultatEscollida][1];
 
@@ -96,7 +97,7 @@ function jocTrilers() {
 
         saldoRestant = saldoRestant - dinersApostats;
 
-        alert('Quina pena ' + nomUsuari + ', has perdut!\nLa boleta estava al cubilet ' + numRandom + ' i has apostat al ' + numUsuari);
+        alert('Quina pena ' + nomUsuari + ', has perdut!\nLa boleta estava al cubilet ' + numRandom + ', i has apostat ' + dinersApostats + '€ al cubilet ' + numUsuari);
 
     }
 
@@ -112,7 +113,7 @@ function crearAleatori(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-// el confirm que reinicia una altra aposta, o cancelar per reiniciar nom, dificultat etc.
+// el confirm que reinicia una altra aposta, o cancelar per reiniciar tot.
 function confirmJugar() {
     let text = 'Tens ' + saldoRestant + '€.\nVols continuar jugant?';
     if (confirm(text) == true) {
