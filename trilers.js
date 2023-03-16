@@ -56,7 +56,7 @@ let dinersApostats;
 
 let numRandom;
 
-let numUsuari;
+let numUsuari = 0;
 
 function jocTrilers() {
 
